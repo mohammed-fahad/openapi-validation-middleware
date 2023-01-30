@@ -561,7 +561,7 @@ class OpenApiValidation implements MiddlewareInterface
                 $err[$attr] = $value;
             }
             if ('error_required' == $err['code']) {
-                $err['name'] .= mb_strlen($err['name']) ? '.'.$err['missing'] : $err['missing'];
+                $err['name'] .= ($err['name'] && mb_strlen($err['name'])) ? '.'.array_shift($err['missing']) : array_shift($err['missing']);
                 unset($err['missing'],$err['value']);
             }
             if ('error_'.'$'.'schema' == $err['code']) {
